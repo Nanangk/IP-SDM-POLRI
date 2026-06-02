@@ -18,7 +18,7 @@
 
         <a href="{{ route('pegawai.index', ['status_nilai' => 'lengkap']) }}"
             class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 hover:shadow-md hover:border-green-300 transition">
-            <p class="text-sm text-slate-500">Sudah Mengisi Nilai</p>
+            <p class="text-sm text-slate-500">Sudah Lengkap Mengisi Nilai</p>
             <p class="text-3xl font-bold text-green-600 mt-2">
                 {{ $jumlahSudahMengisiNilai }}
             </p>
@@ -27,7 +27,7 @@
 
         <a href="{{ route('pegawai.index', ['status_nilai' => 'belum_lengkap']) }}"
             class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 hover:shadow-md hover:border-red-300 transition">
-            <p class="text-sm text-slate-500">Belum Mengisi Nilai</p>
+            <p class="text-sm text-slate-500">Belum Lengkap Mengisi Nilai</p>
             <p class="text-3xl font-bold text-red-600 mt-2">
                 {{ $jumlahBelumMengisiNilai }}
             </p>
@@ -35,7 +35,7 @@
         </a>
 
         <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6">
-            <p class="text-sm text-slate-500">Rata-rata Nilai IP</p>
+            <p class="text-sm text-slate-500">Nilai IP</p>
             <p class="text-3xl font-bold text-blue-600 mt-2">
                 {{ number_format($rataRataIp ?? 0, 2) }}
             </p>
@@ -95,91 +95,4 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
-            <div class="px-6 py-4 border-b border-slate-200">
-                <h3 class="font-semibold text-slate-900">Top 5 Nilai IP Tertinggi</h3>
-                <p class="text-sm text-slate-500">Personel dengan nilai IP terbaik.</p>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm">
-                    <thead class="bg-slate-50 text-slate-600">
-                        <tr>
-                            <th class="px-4 py-3 text-left font-semibold border-b border-slate-200">No</th>
-                            <th class="px-4 py-3 text-left font-semibold border-b border-slate-200">Nama</th>
-                            <th class="px-4 py-3 text-left font-semibold border-b border-slate-200">Pangkat</th>
-                            <th class="px-4 py-3 text-left font-semibold border-b border-slate-200">Satker</th>
-                            <th class="px-4 py-3 text-left font-semibold border-b border-slate-200">Nilai IP</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @forelse ($topPersonel as $index => $item)
-                            <tr class="hover:bg-slate-50">
-                                <td class="px-4 py-3 border-b border-slate-100">{{ $index + 1 }}</td>
-                                <td class="px-4 py-3 border-b border-slate-100 font-medium">
-                                    {{ $item->nama }}
-                                </td>
-                                <td class="px-4 py-3 border-b border-slate-100">{{ $item->pangkat }}</td>
-                                <td class="px-4 py-3 border-b border-slate-100">{{ $item->satuan_kerja }}</td>
-                                <td class="px-4 py-3 border-b border-slate-100 font-bold text-green-600">
-                                    {{ number_format($item->nilai_ip_personel ?? 0, 2) }}
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="5" class="px-4 py-6 text-center text-slate-500">
-                                    Belum ada data penilaian.
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
-            <div class="px-6 py-4 border-b border-slate-200">
-                <h3 class="font-semibold text-slate-900">Personel Nilai IP Rendah</h3>
-                <p class="text-sm text-slate-500">Personel dengan Nilai IP di bawah 60.</p>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm">
-                    <thead class="bg-slate-50 text-slate-600">
-                        <tr>
-                            <th class="px-4 py-3 text-left font-semibold border-b border-slate-200">No</th>
-                            <th class="px-4 py-3 text-left font-semibold border-b border-slate-200">Nama</th>
-                            <th class="px-4 py-3 text-left font-semibold border-b border-slate-200">Pangkat</th>
-                            <th class="px-4 py-3 text-left font-semibold border-b border-slate-200">Satker</th>
-                            <th class="px-4 py-3 text-left font-semibold border-b border-slate-200">Nilai IP</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @forelse ($personelIpRendah as $index => $item)
-                            <tr class="hover:bg-slate-50">
-                                <td class="px-4 py-3 border-b border-slate-100">{{ $index + 1 }}</td>
-                                <td class="px-4 py-3 border-b border-slate-100 font-medium">
-                                    {{ $item->nama }}
-                                </td>
-                                <td class="px-4 py-3 border-b border-slate-100">{{ $item->pangkat }}</td>
-                                <td class="px-4 py-3 border-b border-slate-100">{{ $item->satuan_kerja }}</td>
-                                <td class="px-4 py-3 border-b border-slate-100 font-bold text-red-600">
-                                    {{ number_format($item->nilai_ip_personel ?? 0, 2) }}
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="5" class="px-4 py-6 text-center text-slate-500">
-                                    Tidak ada personel dengan Nilai IP di bawah 60.
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 @endsection
